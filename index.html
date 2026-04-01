@@ -147,6 +147,7 @@ nav.solid {
   opacity: 0; pointer-events: none;
   transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  scrollbar-gutter: stable; /* reserva o espaço da scrollbar para evitar que conteúdo a bloqueie */
 }
 .page.active {
   opacity: 1; pointer-events: all;
@@ -427,6 +428,16 @@ nav.solid {
   width: 100%;
   height: 85vh;
   min-height: 520px;
+  /* Reserva espaço para a scrollbar do navegador em desktop */
+  box-sizing: border-box;
+  padding-right: 0;
+}
+
+/* Em desktop, o canvas não deve cobrir a scrollbar */
+@media (min-width: 901px) {
+  .pano-viewer-wrap {
+    width: calc(100% - 17px); /* 17px = largura típica da scrollbar */
+  }
 }
 
 #pano-viewer {
@@ -1039,10 +1050,14 @@ footer {
   padding: 40px 60px;
 }
 .footer-inner {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: flex-start; justify-content: space-between;
   padding-bottom: 24px;
   border-bottom: 1px solid rgba(255,255,255,0.07);
   margin-bottom: 20px;
+}
+/* Lado esquerdo: logo + sociais empilhados */
+.footer-left {
+  display: flex; flex-direction: column; gap: 16px;
 }
 .footer-logo {
   font-family: 'Cinzel', serif;
@@ -1062,15 +1077,27 @@ footer {
 }
 .footer-social svg { width: 15px; height: 15px; }
 .footer-social:hover { color: var(--warm-white); border-color: rgba(255,255,255,0.25); }
+/* Links de navegação — lado direito do topo */
+.footer-nav {
+  display: flex; gap: 28px; align-items: flex-start;
+}
+.footer-nav a {
+  font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(200,184,154,0.4);
+  text-decoration: none; cursor: pointer;
+  transition: color 0.3s;
+}
+.footer-nav a:hover { color: var(--stone); }
 .footer-bottom {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: flex-start;
 }
 .footer-copy {
   font-size: 11px; color: rgba(200,184,154,0.4);
   letter-spacing: 0.06em;
 }
+/* Mantém classe antiga para compatibilidade mas oculta */
 .footer-links-mini {
-  display: flex; gap: 28px;
+  display: none;
 }
 .footer-links-mini a {
   font-size: 10px; letter-spacing: 0.16em;
@@ -1151,8 +1178,8 @@ footer {
 
   footer { padding: 32px 24px; }
   .footer-inner { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .footer-nav { flex-wrap: wrap; gap: 12px; }
   .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .footer-links-mini { flex-wrap: wrap; gap: 12px; }
 }
 
 /* ══════════════════════════════
@@ -1583,26 +1610,28 @@ footer {
       <button class="btn-dark" onclick="showPage('contato')" data-pt="Fale conosco" data-en="Get in touch">Fale conosco</button>
     </section>
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
+        <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+        <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
+        <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
-          <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
-          <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
-          <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
-        </div>
       </div>
     </footer>
   </div>
@@ -1651,26 +1680,28 @@ footer {
       <p class="fundador-bio fade-in fd2" data-pt="Com mais de uma década dedicada à construção civil no litoral cearense, Edson Filho fundou a EF Construtora com a visão de elevar o padrão das obras na região. Sua abordagem combina rigor técnico com sensibilidade estética, resultando em projetos que respeitam o ambiente natural do litoral e entregam excelência em cada etapa. Sob sua liderança, a empresa se tornou referência em obras de alto padrão, com 55.000 m² construídos e clientes que valorizam qualidade e tranquilidade no processo construtivo." data-en="With over a decade dedicated to construction on the Ceará coast, Edson Filho founded EF Construtora with a vision to elevate construction standards in the region. His approach combines technical rigor with aesthetic sensibility, resulting in projects that respect the natural coastal environment and deliver excellence at every stage. Under his leadership, the company became a benchmark in high-end construction, with 55,000 m² built and clients who value quality and peace of mind throughout the construction process.">Com mais de uma década dedicada à construção civil no litoral cearense, Edson Filho fundou a EF Construtora com a visão de elevar o padrão das obras na região. Sua abordagem combina rigor técnico com sensibilidade estética, resultando em projetos que respeitam o ambiente natural do litoral e entregam excelência em cada etapa. Sob sua liderança, a empresa se tornou referência em obras de alto padrão, com 55.000 m² construídos e clientes que valorizam qualidade e tranquilidade no processo construtivo.</p>
     </section>
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
+        <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+        <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
+        <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
-          <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
-          <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
-          <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
-        </div>
       </div>
     </footer>
   </div>
@@ -1702,26 +1733,28 @@ footer {
 
 
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
+        <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
+        <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
+        <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
-          <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
-          <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
-          <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
-        </div>
       </div>
     </footer>
   </div>
@@ -1871,26 +1904,28 @@ footer {
       </div>
     </div>
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
+        <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
+        <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+        <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
-          <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
-          <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
-          <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
-        </div>
       </div>
     </footer>
   </div>
@@ -2004,26 +2039,28 @@ footer {
       </div>
     </div>
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
+        <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
+        <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+        <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
-          <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
-          <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
-          <a onclick="showPage('clientes')" data-pt="Obras" data-en="Works">Obras</a>
-        </div>
       </div>
     </footer>
   </div>
@@ -2189,26 +2226,28 @@ footer {
       </div><!-- /midia-grid -->
     </div><!-- /midia-page -->
 
-    <footer>
+        <footer>
       <div class="footer-inner">
-        <div class="footer-logo">EF <span>Construtora</span></div>
-        <div class="footer-socials">
-          <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </a>
+        <div class="footer-left">
+          <div class="footer-logo">EF <span>Construtora</span></div>
+          <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/ef.construtora" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+            </a>
+            <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+          </div>
         </div>
+        <nav class="footer-nav">
+        <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
+        <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
+        <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
+        <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
+        </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-copy" data-pt="© 2025 EF Construtora · Litoral Cearense, Brasil" data-en="© 2025 EF Construtora · Ceará Coast, Brazil">© 2025 EF Construtora · Litoral Cearense, Brasil</div>
-        <div class="footer-links-mini">
-          <a onclick="showPage('home')" data-pt="Home" data-en="Home">Home</a>
-          <a onclick="showPage('sobre')" data-pt="Sobre" data-en="About">Sobre</a>
-          <a onclick="showPage('portfolio')" data-pt="Portfólio" data-en="Portfolio">Portfólio</a>
-          <a onclick="showPage('contato')" data-pt="Contato" data-en="Contact">Contato</a>
-        </div>
       </div>
     </footer>
   </div><!-- /page-midia -->
@@ -3039,6 +3078,10 @@ function renderLoop() {
 }
 
 function onPanoDown(e) {
+  // Ignora cliques fora dos limites visuais do canvas (ex: área da scrollbar do navegador)
+  const rect = e.currentTarget.getBoundingClientRect();
+  if (e.clientX < rect.left || e.clientX > rect.right ||
+      e.clientY < rect.top  || e.clientY > rect.bottom) return;
   isDragging = true; autoRotate = false;
   prevMouse = { x: e.clientX, y: e.clientY };
 }
@@ -3194,7 +3237,7 @@ function calcSimulador() {
 /* ── WRAP ── */
 #whatsapp-float-wrap {
   position: fixed;
-  bottom: 32px;
+  bottom: 80px;
   right: 32px;
   z-index: 999;
   display: flex;
@@ -3290,7 +3333,7 @@ function calcSimulador() {
 
 /* ── MOBILE ── */
 @media (max-width: 768px) {
-  #whatsapp-float-wrap { bottom: 22px; right: 20px; }
+  #whatsapp-float-wrap { bottom: 22px !important; right: 20px; }
   #whatsapp-float      { width: 52px; height: 52px; }
   #whatsapp-float svg  { width: 24px; height: 24px; }
   #whatsapp-float-bubble { font-size: 11px; padding: 9px 14px; }
