@@ -501,6 +501,32 @@ nav.solid {
   50% { opacity: 0.5; transform: scale(0.7); }
 }
 
+/* ── HOME: PORTFÓLIO PREVIEW ── */
+.home-portfolio-preview {
+  padding: 100px 60px 80px;
+  background: var(--sand);
+  border-top: 1px solid var(--line);
+}
+.home-portfolio-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 52px;
+}
+.home-portfolio-masonry {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  margin-bottom: 52px;
+}
+.home-portfolio-cta {
+  text-align: center;
+  padding-top: 8px;
+}
+@media (max-width: 900px) {
+  .home-portfolio-preview { padding: 60px 24px; }
+  .home-portfolio-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .home-portfolio-masonry #home-masonry-col-2 { display: none; }
+}
+
 /* ── HOME: FEATURES SECTION ── */
 .home-features {
   padding: 100px 60px;
@@ -1398,6 +1424,7 @@ footer {
   .midia-card.featured { flex-direction: column; grid-column: span 1; }
   .midia-card.featured .midia-card-img-wrap { width: 100%; aspect-ratio: 4/3; }
 }
+
 </style>
 </head>
 <body>
@@ -1412,7 +1439,7 @@ footer {
     <li><a onclick="showPage('clientes')" data-page="clientes" data-pt="Obras" data-en="Works">Obras</a></li>
     <li><a onclick="showPage('midia')" data-page="midia" data-pt="News" data-en="Press">News</a></li>
     <li><a onclick="showPage('contato')" data-page="contato" data-pt="Contato" data-en="Contact">Contato</a></li>
-    <li><a onclick="showPage('painel')" data-page="painel" data-pt="Cliente" data-en="Client">Cliente</a></li>
+
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1427,7 +1454,7 @@ footer {
   <a onclick="showPage('clientes');toggleMenu()" data-page="clientes" data-pt="Obras" data-en="Works">Obras</a>
   <a onclick="showPage('midia');toggleMenu()" data-page="midia" data-pt="News" data-en="Press">News</a>
   <a onclick="showPage('contato');toggleMenu()" data-page="contato" data-pt="Contato" data-en="Contact">Contato</a>
-  <a onclick="showPage('painel');toggleMenu()" data-page="painel" data-pt="Cliente" data-en="Client">Cliente</a>
+
   <div class="mobile-lang">
     <button id="lang-btn-pt" class="active" onclick="setLang('pt')">PT</button>
     <div class="mobile-lang-sep"></div>
@@ -1540,6 +1567,27 @@ footer {
       </div>
     </section>
 
+    <!-- ══ HOME: PORTFÓLIO PREVIEW ══ -->
+    <section class="home-portfolio-preview">
+      <div class="home-portfolio-header">
+        <div>
+          <p class="home-about-tag fade-in" data-pt="Obras realizadas" data-en="Completed works">Obras realizadas</p>
+          <h2 class="home-features-title fade-in fd2" data-pt="Nosso <em>Portfólio</em>" data-en="Our <em>Portfolio</em>">Nosso <em>Portfólio</em></h2>
+        </div>
+        <p class="home-features-sub fade-in fd3" data-pt="Uma seleção dos nossos projetos mais recentes no litoral cearense." data-en="A selection of our most recent projects on the Ceará coast.">Uma seleção dos nossos projetos mais recentes no litoral cearense.</p>
+      </div>
+      <div class="home-portfolio-masonry" id="home-masonry">
+        <div class="masonry-col" id="home-masonry-col-0"></div>
+        <div class="masonry-col" id="home-masonry-col-1"></div>
+        <div class="masonry-col" id="home-masonry-col-2"></div>
+      </div>
+      <div class="home-portfolio-cta fade-in">
+        <button class="btn-dark" onclick="showPage('portfolio')">
+          <span data-pt="Ver portfólio completo" data-en="View full portfolio">Ver portfólio completo</span>
+        </button>
+      </div>
+    </section>
+
     <section class="home-features">
       <div class="home-features-header">
         <h2 class="home-features-title fade-in" data-pt="Por que escolher<br><em>a EF?</em>" data-en="Why choose<br><em>EF?</em>">Por que escolher<br><em>a EF?</em></h2>
@@ -1590,7 +1638,7 @@ footer {
       <div class="home-about-content">
         <p class="home-about-tag fade-in" data-pt="Nossa história" data-en="Our story">Nossa história</p>
         <h2 class="home-about-title fade-in fd2" data-pt="Construindo sonhos<br><em>desde 2012</em>" data-en="Building dreams<br><em>since 2012</em>">Construindo sonhos<br><em>desde 2012</em></h2>
-        <p class="home-about-text fade-in fd3" data-pt="Fundada pelo engenheiro Edson Filho, a EF Construtora nasceu com o propósito de transformar a construção civil em uma experiência tranquila e sofisticada no litoral cearense." data-en="Founded by engineer Edson Filho, EF Construtora was born with the purpose of transforming construction into a calm and sophisticated experience along the Ceará coast.">Fundada pelo engenheiro Edson Filho, a EF Construtora nasceu com o propósito de transformar a construção civil em uma experiência tranquila e sofisticada no litoral cearense.</p>
+        <p class="home-about-text fade-in fd3" data-pt="Nascida em 2012 com foco em excelência construtiva, a EF consolidou-se como referência em obras de alto padrão no litoral." data-en="Born in 2012 with a focus on construction excellence, EF has established itself as a reference in high-end construction on the coast.">Nascida em 2012 com foco em excelência construtiva, a EF consolidou-se como referência em obras de alto padrão no litoral.</p>
         <button class="home-about-link fade-in fd4" onclick="showPage('sobre')" data-pt="Conheça nossa história" data-en="Learn our story">Conheça nossa história</button>
       </div>
     </section>
@@ -1626,6 +1674,9 @@ footer {
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            </a>
           </div>
         </div>
         <nav class="footer-nav">
@@ -1650,7 +1701,7 @@ footer {
       <div class="sobre-content">
         <p class="page-tag fade-in" data-pt="Nossa história" data-en="Our story">Nossa história</p>
         <h1 class="page-title fade-in fd2" data-pt="Construindo <em>sonhos</em><br>desde 2012" data-en="Building <em>dreams</em><br>since 2012">Construindo <em>sonhos</em><br>desde 2012</h1>
-        <p class="page-text fade-in fd3" data-pt="Fundada pelo engenheiro Edson Filho, a EF Construtora nasceu com o propósito de transformar a construção civil em uma experiência tranquila e sofisticada." data-en="Founded by engineer Edson Filho, EF Construtora was born with the purpose of transforming construction into a calm and sophisticated experience.">Fundada pelo engenheiro Edson Filho, a EF Construtora nasceu com o propósito de transformar a construção civil em uma experiência tranquila e sofisticada.</p>
+        <p class="page-text fade-in fd3" data-pt="Nascida em 2012 com foco em excelência construtiva, a EF consolidou-se como referência em obras de alto padrão no litoral." data-en="Born in 2012 with a focus on constructive excellence, EF has established itself as a reference in high-end construction on the coast.">Nascida em 2012 com foco em excelência construtiva, a EF consolidou-se como referência em obras de alto padrão no litoral.</p>
         <p class="page-text fade-in fd3" data-pt="Especializados em obras de alto padrão, combinamos técnicas construtivas inovadoras com práticas sustentáveis, sempre respeitando o meio ambiente e as comunidades locais do litoral cearense." data-en="Specialized in high-end construction, we combine innovative techniques with sustainable practices, always respecting the environment and local communities of the Ceará coast.">Especializados em obras de alto padrão, combinamos técnicas construtivas inovadoras com práticas sustentáveis, sempre respeitando o meio ambiente e as comunidades locais do litoral cearense.</p>
       </div>
     </section>
@@ -1695,6 +1746,9 @@ footer {
             </a>
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
             </a>
           </div>
         </div>
@@ -1748,6 +1802,9 @@ footer {
             </a>
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
             </a>
           </div>
         </div>
@@ -1920,6 +1977,9 @@ footer {
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            </a>
           </div>
         </div>
         <nav class="footer-nav">
@@ -1946,7 +2006,7 @@ footer {
         <div class="contato-info fade-in fd3">
           <div class="info-item">
             <span class="info-label" data-pt="Localização" data-en="Location">Localização</span>
-            <span class="info-value" data-pt="Litoral Cearense,  Camocim - CE" data-en="Ceará Coast, Camocim - CE">Litoral Cearense, Camocim - CE</span>
+            <span class="info-value" data-pt="Sediados em Camocim (CE), atendemos todo o litoral do Ceará e do Piauí." data-en="Based in Camocim (CE), we serve the entire coast of Ceará and Piauí.">Sediados em Camocim (CE), atendemos todo o litoral do Ceará e do Piauí.</span>
           </div>
           <div class="info-item">
             <span class="info-label" data-pt="Telefone" data-en="Phone">Telefone</span>
@@ -1968,6 +2028,9 @@ footer {
           </a>
           <a class="social-link" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+          <a class="social-link" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
           </a>
         </div>
       </div>
@@ -2054,6 +2117,9 @@ footer {
             </a>
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
             </a>
           </div>
         </div>
@@ -2242,6 +2308,9 @@ footer {
             <a class="footer-social" href="https://wa.me/5585997489473" target="_blank" title="WhatsApp">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             </a>
+            <a class="footer-social" href="https://pin.it/2GPBYNwUz" target="_blank" title="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.236 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.598-.299-1.482c0-1.388.806-2.428 1.808-2.428.853 0 1.267.641 1.267 1.408 0 .858-.546 2.14-.828 3.33-.236.995.499 1.806 1.48 1.806 1.773 0 3.137-1.868 3.137-4.568 0-2.386-1.717-4.054-4.165-4.054-2.836 0-4.498 2.126-4.498 4.326 0 .856.33 1.775.741 2.276a.3.3 0 0 1 .069.286c-.075.314-.243.995-.277 1.134-.044.183-.146.222-.336.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.292-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            </a>
           </div>
         </div>
         <nav class="footer-nav">
@@ -2259,254 +2328,8 @@ footer {
 
 </div><!-- /pages-wrapper -->
 
-  <!-- ══ PAGE: CLIENTE ══ -->
-  <div class="page" id="page-painel">
-    <div class="painel-page">
 
-      <!-- HERO DA PÁGINA -->
-      <div class="painel-hero">
-        <p class="page-tag fade-in" data-pt="Exclusivo · EF Construtora" data-en="Exclusive · EF Construtora">Exclusivo · EF Construtora</p>
-        <h1 class="page-title fade-in fd2" data-pt="<em>Cliente</em>" data-en="<em>Client</em>"><em>Cliente</em></h1>
-        <p class="painel-sub fade-in fd3" data-pt="Acompanhe sua obra, simule financiamentos e conheça cada detalhe do seu projeto — tudo em um só lugar." data-en="Track your construction, simulate financing and discover every detail of your project — all in one place.">Acompanhe sua obra, simule financiamentos e conheça cada detalhe do seu projeto — tudo em um só lugar.</p>
-      </div>
 
-      <!-- ══ BLOCO 1: FLUXO DA OBRA ══ -->
-      <div class="painel-block">
-        <div class="painel-block-header">
-          <span class="painel-block-tag">01</span>
-          <div>
-            <h2 class="painel-block-title" data-pt="Acompanhamento de <em>Obra</em>" data-en="Construction <em>Progress</em>">Acompanhamento de <em>Obra</em></h2>
-            <p class="painel-block-desc" data-pt="Veja o progresso de cada etapa construtiva com estimativas de tempo reais." data-en="See the progress of each construction stage with real time estimates.">Veja o progresso de cada etapa construtiva com estimativas de tempo reais.</p>
-          </div>
-        </div>
-
-        <div class="obra-flow">
-          <!-- Fundação: 10% do tempo total -->
-          <div class="obra-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/></svg>
-              </div>
-              <div class="obra-connector"></div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Fundação" data-en="Foundation">Fundação</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Escavação, sapatas, radier e impermeabilização de base." data-en="Excavation, footings, raft slab and base waterproofing.">Escavação, sapatas, radier e impermeabilização de base.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 10%"></div>
-                <span class="obra-bar-label obra-time-pct">10%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 3 – 5 semanas" data-en="⏱ Estimated duration: 3 – 5 weeks">⏱ Duração estimada: 3 – 5 semanas</span>
-            </div>
-          </div>
-
-          <!-- Estrutura: 20% do tempo total -->
-          <div class="obra-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
-              </div>
-              <div class="obra-connector"></div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Estrutura" data-en="Structure">Estrutura</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Pilares, vigas, lajes e estrutura de concreto armado." data-en="Columns, beams, slabs and reinforced concrete structure.">Pilares, vigas, lajes e estrutura de concreto armado.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 20%"></div>
-                <span class="obra-bar-label obra-time-pct">20%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 6 – 10 semanas" data-en="⏱ Estimated duration: 6 – 10 weeks">⏱ Duração estimada: 6 – 10 semanas</span>
-            </div>
-          </div>
-
-          <!-- Alvenaria: 15% do tempo total -->
-          <div class="obra-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div class="obra-connector"></div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Alvenaria" data-en="Masonry">Alvenaria</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Paredes internas e externas, blocos cerâmicos e vergas." data-en="Internal and external walls, ceramic blocks and lintels.">Paredes internas e externas, blocos cerâmicos e vergas.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 15%"></div>
-                <span class="obra-bar-label obra-time-pct">15%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 4 – 6 semanas" data-en="⏱ Estimated duration: 4 – 6 weeks">⏱ Duração estimada: 4 – 6 semanas</span>
-            </div>
-          </div>
-
-          <!-- Instalações: 20% do tempo total -->
-          <div class="obra-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-              </div>
-              <div class="obra-connector"></div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Instalações" data-en="Systems">Instalações</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Elétrica, hidráulica, gás e cabeamento estruturado." data-en="Electrical, plumbing, gas and structured cabling.">Elétrica, hidráulica, gás e cabeamento estruturado.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 20%"></div>
-                <span class="obra-bar-label obra-time-pct">20%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 5 – 8 semanas" data-en="⏱ Estimated duration: 5 – 8 weeks">⏱ Duração estimada: 5 – 8 semanas</span>
-            </div>
-          </div>
-
-          <!-- Revestimento: 20% do tempo total -->
-          <div class="obra-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-              </div>
-              <div class="obra-connector"></div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Revestimento" data-en="Cladding">Revestimento</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Reboco, gesso, porcelanato, azulejos e texturas externas." data-en="Plastering, gypsum, porcelain tiles, wall tiles and external textures.">Reboco, gesso, porcelanato, azulejos e texturas externas.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 20%"></div>
-                <span class="obra-bar-label obra-time-pct">20%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 6 – 9 semanas" data-en="⏱ Estimated duration: 6 – 9 weeks">⏱ Duração estimada: 6 – 9 semanas</span>
-            </div>
-          </div>
-
-          <!-- Acabamento: 15% do tempo total — last-step -->
-          <div class="obra-step last-step">
-            <div class="obra-step-left">
-              <div class="obra-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-            </div>
-            <div class="obra-step-body">
-              <div class="obra-step-top">
-                <span class="obra-step-name" data-pt="Acabamento &amp; Entrega" data-en="Finishing &amp; Handover">Acabamento &amp; Entrega</span>
-              </div>
-              <p class="obra-step-desc" data-pt="Pintura, louças, metais, esquadrias e entrega das chaves." data-en="Painting, sanitary ware, metal fixtures, frames and key handover.">Pintura, louças, metais, esquadrias e entrega das chaves.</p>
-              <div class="obra-bar-wrap">
-                <div class="obra-bar" style="--prog: 15%"></div>
-                <span class="obra-bar-label obra-time-pct">15%</span>
-              </div>
-              <span class="obra-duration" data-pt="⏱ Duração estimada: 4 – 6 semanas" data-en="⏱ Estimated duration: 4 – 6 weeks">⏱ Duração estimada: 4 – 6 semanas</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tempo total estimado -->
-        <div class="obra-total-wrap">
-          <div class="obra-total-inner">
-            <div class="obra-total-left">
-              <span class="obra-total-label" data-pt="Tempo total estimado da obra" data-en="Total estimated construction time">Tempo total estimado da obra</span>
-              <span class="obra-total-range" data-pt="28 – 44 semanas · até a entrega das chaves" data-en="28 – 44 weeks · through key handover">28 – 44 semanas · até a entrega das chaves</span>
-            </div>
-            <div class="obra-total-value">
-              <span class="obra-total-months" data-pt="~7–11" data-en="~7–11">~7–11</span>
-              <span class="obra-total-unit" data-pt="meses" data-en="months">meses</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- DIVISOR -->
-      <div class="painel-divider"></div>
-
-      <!-- ══ BLOCO 2: SIMULADOR ══ -->
-      <div class="painel-block">
-        <div class="painel-block-header">
-          <span class="painel-block-tag">02</span>
-          <div>
-            <h2 class="painel-block-title" data-pt="Simulador de <em>Financiamento</em>" data-en="Financing <em>Simulator</em>">Simulador de <em>Financiamento</em></h2>
-            <p class="painel-block-desc" data-pt="Preencha os campos e veja uma estimativa instantânea das suas parcelas." data-en="Fill in the fields and see an instant estimate of your installments.">Preencha os campos e veja uma estimativa instantânea das suas parcelas.</p>
-          </div>
-        </div>
-
-        <div class="simulador-card">
-          <div class="simulador-inputs">
-            <div class="sim-field">
-              <label class="sim-label" data-pt="Valor total da obra" data-en="Total construction value">Valor total da obra</label>
-              <div class="sim-input-wrap">
-                <span class="sim-prefix">R$</span>
-                <input type="text" id="sim-total" class="sim-input" placeholder="500.000" oninput="calcSimulador()">
-              </div>
-            </div>
-            <div class="sim-field">
-              <label class="sim-label" data-pt="Valor da entrada" data-en="Down payment">Valor da entrada</label>
-              <div class="sim-input-wrap">
-                <span class="sim-prefix">R$</span>
-                <input type="text" id="sim-entrada" class="sim-input" placeholder="100.000" oninput="calcSimulador()">
-              </div>
-            </div>
-            <div class="sim-field">
-              <label class="sim-label" data-pt="Prazo" data-en="Term">Prazo</label>
-              <div class="sim-input-wrap">
-                <input type="number" id="sim-prazo" class="sim-input" placeholder="120" min="12" max="420" oninput="calcSimulador()">
-                <span class="sim-suffix" data-pt="meses" data-en="months">meses</span>
-              </div>
-            </div>
-            <div class="sim-field">
-              <label class="sim-label" data-pt="Taxa de juros anual" data-en="Annual interest rate">Taxa de juros anual</label>
-              <div class="sim-input-wrap">
-                <input type="number" id="sim-taxa" class="sim-input" placeholder="10,5" step="0.1" oninput="calcSimulador()">
-                <span class="sim-suffix">% a.a.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="simulador-result" id="sim-result">
-            <div class="sim-result-placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3"/><path d="M9 15h3l8.5-8.5a1.5 1.5 0 00-3-3L9 12v3"/></svg>
-              <p data-pt="Preencha os campos ao lado para ver a simulação" data-en="Fill in the fields to see the simulation">Preencha os campos ao lado para ver a simulação</p>
-            </div>
-            <div class="sim-result-data" id="sim-data" style="display:none">
-              <div class="sim-res-item main-res">
-                <span class="sim-res-label" data-pt="Parcela estimada" data-en="Estimated installment">Parcela estimada</span>
-                <span class="sim-res-value" id="sim-parcela">—</span>
-                <span class="sim-res-sub" data-pt="Sistema Price (tabela de parcelas fixas)" data-en="Price System (fixed installments)">Sistema Price (tabela de parcelas fixas)</span>
-              </div>
-              <div class="sim-res-row">
-                <div class="sim-res-item">
-                  <span class="sim-res-label" data-pt="Valor financiado" data-en="Financed amount">Valor financiado</span>
-                  <span class="sim-res-value sm" id="sim-financiado">—</span>
-                </div>
-                <div class="sim-res-item">
-                  <span class="sim-res-label" data-pt="Total pago" data-en="Total paid">Total pago</span>
-                  <span class="sim-res-value sm" id="sim-total-pago">—</span>
-                </div>
-                <div class="sim-res-item">
-                  <span class="sim-res-label" data-pt="Total de juros" data-en="Total interest">Total de juros</span>
-                  <span class="sim-res-value sm" id="sim-juros">—</span>
-                </div>
-              </div>
-              <p class="sim-disclaimer" data-pt="* Simulação estimativa. Valores reais sujeitos à análise de crédito." data-en="* Estimated simulation. Actual values subject to credit analysis.">* Simulação estimativa. Valores reais sujeitos à análise de crédito.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA FINAL -->
-      <div class="painel-cta-block">
-        <p class="painel-cta-text" data-pt="Tem dúvidas sobre sua obra ou materiais?" data-en="Have questions about your construction or materials?">Tem dúvidas sobre sua obra ou materiais?</p>
-        <button class="painel-cta-btn" onclick="showPage('contato')" data-pt="Falar com a equipe" data-en="Talk to the team">Falar com a equipe</button>
-      </div>
-
-    </div><!-- /painel-page -->
-  </div><!-- /page-painel -->
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 let currentPage = 'home';
@@ -2718,7 +2541,69 @@ function triggerFades(container) {
   els.forEach(el => io.observe(el));
 }
 
-// ── PORTFOLIO FILTER ──
+// ── HOME PORTFOLIO PREVIEW ──
+const HOME_PREVIEW_LIMIT = 12; // número de imagens na home
+let _homePortfolioLoaded = false;
+
+async function loadHomePortfolioPreview() {
+  if (_homePortfolioLoaded) return;
+  _homePortfolioLoaded = true;
+
+  try {
+    const [resExt, resInt] = await Promise.all([
+      fetch('imagens/exteriores/manifest.json'),
+      fetch('imagens/interiores/manifest.json'),
+    ]);
+    const extFiles = resExt.ok ? await resExt.json() : [];
+    const intFiles = resInt.ok ? await resInt.json() : [];
+
+    const extItems = extFiles.map(f => ({ src: `imagens/exteriores/${f}`, cat: 'exteriores' }));
+    const intItems = intFiles.map(f => ({ src: `imagens/interiores/${f}`, cat: 'interiores' }));
+
+    // Intercala exteriores e interiores
+    const all = [];
+    const maxLen = Math.max(extItems.length, intItems.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (i < extItems.length) all.push(extItems[i]);
+      if (i < intItems.length) all.push(intItems[i]);
+    }
+
+    const preview = all.slice(0, HOME_PREVIEW_LIMIT);
+    const cols = [
+      document.getElementById('home-masonry-col-0'),
+      document.getElementById('home-masonry-col-1'),
+      document.getElementById('home-masonry-col-2'),
+    ];
+
+    preview.forEach((item, idx) => {
+      const col = cols[idx % 3];
+      if (!col) return;
+      const div = document.createElement('div');
+      div.className = 'port-item fade-in';
+      div.onclick = () => showPage('portfolio');
+      div.innerHTML = `
+        <img loading="lazy" decoding="async" src="${item.src}" alt="Portfólio EF Construtora">
+        <div class="port-overlay">
+          <span class="port-tag">${item.cat === 'exteriores' ? 'Exterior' : 'Interior'}</span>
+        </div>`;
+      col.appendChild(div);
+    });
+
+    // Triggera fade-in dos novos elementos
+    const homePageEl = document.getElementById('page-home');
+    if (homePageEl) triggerFades(homePageEl);
+
+  } catch (err) {
+    console.warn('Home portfolio preview: erro ao carregar.', err);
+  }
+}
+
+// Carrega a preview do portfólio na home assim que a página estiver pronta
+document.addEventListener('DOMContentLoaded', () => {
+  loadHomePortfolioPreview();
+});
+
+
 // ══════════════════════════════════════════════════
 // PORTFÓLIO DINÂMICO
 // ──────────────────────────────────────────────────
